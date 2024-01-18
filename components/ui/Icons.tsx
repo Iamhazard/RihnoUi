@@ -23,7 +23,7 @@ export const Icons = {
         strokeLinecap="round"
         strokeLinejoin="round"
         stroke="#CCCCCC"
-        stroke-width="0.128"
+        strokeWidth="0.128"
       />
 
       <g id="SVGRepo_iconCarrier">
