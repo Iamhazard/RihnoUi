@@ -1,9 +1,9 @@
 "use client";
 
-import { PRODUCT_CATEGORIES } from "@/config";
+import { PRODUCT_CATEGORIES } from "@/components/config";
 import { Button } from "./ui/button";
 import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 

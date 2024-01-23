@@ -1,6 +1,7 @@
 import express from "express";
-import { getPayloadClient } from "./lib/get-payload";
+import { getPayloadClient } from "./get-payload";
 import { nextApp, nextHandler } from "./next-utils";
+import * as trpcExpress from '@trpc/server/adapters/express';
 
 const app = express();
 
@@ -10,10 +11,12 @@ const start = async () => {
     initOptions: {
       express: app,
       onInit: async (cms) => {
-        cms.logger.info(`Admin URL ${cms.getAdminURl()}`);
+        cms.logger.info(`Admin URL ${cms.getAdminURL()}`);
       },
     },
   });
+
+  app.use('/api/trpc', trpcExpress)
   app.use((req, res) => nextHandler(req, res));
 
   nextApp.prepare().then(() => {

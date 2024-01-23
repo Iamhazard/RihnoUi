@@ -10,13 +10,13 @@ import {
 } from "../ui/sheet";
 import { ShoppingCart } from "lucide-react";
 import { Separator } from "./separator";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/components/lib/utils";
 import Link from "next/link";
 import { buttonVariants } from "./button";
 import Image from "next/image";
 
 const Cart = () => {
-  const itemCount = 0;
+  const itemCount = 1;
   const fee = 1;
   return (
     <Sheet>
