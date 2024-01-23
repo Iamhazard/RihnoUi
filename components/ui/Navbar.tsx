@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Icons } from "./Icons";
 import NavItems from "./NavItems";
 import { buttonVariants } from "./button";
-import { Ghost } from "lucide-react";
 import Cart from "./Cart";
 
 const Navbar = () => {

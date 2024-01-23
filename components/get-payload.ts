@@ -4,7 +4,7 @@ import payload from "payload";
 import type { InitOptions } from "payload/config";
 
 dotenv.config({
-  path: path.resolve(__dirname, "../env"),
+  path: path.resolve(__dirname, "../.env"),
 });
 
 let cached = (global as any).payload;
@@ -17,7 +17,7 @@ if (!cached) {
 }
 
 interface Args {
-  initOptions?: Partial<initOptions>;
+  initOptions?: Partial<InitOptions>;
 }
 
 export const getPayloadClient = async ({ initOptions }: Args) => {
