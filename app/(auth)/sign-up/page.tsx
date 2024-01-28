@@ -14,6 +14,7 @@ import {
   SignupSchema,
   TAuthCredentialsValidator,
 } from "@/components/lib/validators/Schems";
+import { trpc } from "@/trpc/client";
 
 const SignUppage = () => {
   const {
@@ -23,7 +24,8 @@ const SignUppage = () => {
   } = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(SignupSchema),
   });
-
+  const { data } = trpc.anyApiRoute.useQuery();
+  console.log(data);
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {};
   return (
     <>

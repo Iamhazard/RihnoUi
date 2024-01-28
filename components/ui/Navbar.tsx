@@ -41,7 +41,7 @@ const Navbar = () => {
                     <p></p>
                   ) : (
                     <Link
-                      href="/"
+                      href="/sign-up"
                       className={buttonVariants({
                         variant: "ghost",
                       })}>
