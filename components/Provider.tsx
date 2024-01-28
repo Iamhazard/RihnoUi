@@ -1,50 +1,31 @@
 "use client";
+
+import { PropsWithChildren, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { getFetch, httpBatchLink, loggerLink } from "@trpc/client";
-import React, { PropsWithChildren, useState } from "react";
-import { trpc } from "../trpc/client";
-import superjson from "superjson";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { trpc } from "@/trpc/client";
+import { httpBatchLink } from "@trpc/client";
 
-const Providers: React.FC<{ children: PropsWithChildren }> = ({ children }) => {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: { queries: { staleTime: 5000 } },
-      })
-  );
-
-  const url = process.env.NEXT_PUBLIC_VERCEL_URL
-    ? `https://${process.env.NEXT_PUBLIC_SERVER_URL}`
-    : "http://localhost:3000/api/trpc/";
-
+const Providers = ({ children }: PropsWithChildren) => {
+  const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
     trpc.createClient({
       links: [
-        loggerLink({
-          enabled: () => true,
-        }),
         httpBatchLink({
-          url,
-          fetch: async (input, init) => {
-            const fetch = getFetch();
-            return fetch(input, {
-              ...init,
+          url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/trpc`,
+          fetch(url, options) {
+            return fetch(url, {
+              ...options,
               credentials: "include",
             });
           },
         }),
       ],
-      transformer: superjson,
     })
   );
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        {children}
-        <ReactQueryDevtools />
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </trpc.Provider>
   );
 };

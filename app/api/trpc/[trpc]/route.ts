@@ -3,15 +3,26 @@ import { appRouter } from '@/trpc';
 import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
 import { NextResponse } from 'next/server';
 
-const handler =(req:Request,res:NextResponse)=>{
+const handler =async(req:Request,res:NextResponse)=>{
+
+    
+        console.log(`incoming request ${req.url}`);
+  
     fetchRequestHandler({
         endpoint:"/api/trpc",
         req,
         router:appRouter,
         createContext:()=>({}),
+        
 
     })
-  return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+     return res.json({ message: "sucess" });
+        
+   
+        
+    
+    
+     
 }
 
 export {handler as GET,handler as POST}
